@@ -1,26 +1,34 @@
-#! / bin / bash
-
-if [ "$1" = "" ]
-then
-echo -e "Enter new web page name ... \c"
-read "page"
-else
+#!/usr/bin/env bash
+# CreateWebSite "nom du fichier" "titre" "chemin des images"
 page="$1"
-fi
-# The following creates the correct filename
-# regardless of the extension entered ...
-page=`echo "$page"|awk -F\. '{print $1}'`
-page=${page}.html
-# I use tmp to spell check all new files:
-echo $page >>tmp
-# start with a standard HTML header:
-cp pageheader $page
-nano $page
-# close the file with a standard footer:
-cat pagefooter >> $page
-# Don't know where the *bak files come from
-# but I don't like them ...
-if [ -f "*bak" ]
-then
-rm -f *bak
-fi
+title="$2"
+folder="$3"
+
+controleVariable() {
+
+    if [ $# = 3 ]; then
+        return 1
+    elif [ "$1" = "" ]; then
+                echo -e "Enter new web page name ... \c";
+                read -r "page";
+            else
+            page="$1";
+        fi
+        if [ "$2" = "" ]; then
+            echo -e "Enter the title ... \c";
+            read -r "title";
+        else
+            title="$2";
+        fi
+        if [ "$3" = "" ]; then
+            echo -e "Enter the folder path ... \c";
+            read -r "folder";
+        else
+            folder="$3";
+        fi
+    
+}
+echo "$@"
+controleVariable "$@"
+echo "$folder"
+
