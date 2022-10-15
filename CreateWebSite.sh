@@ -1,10 +1,43 @@
 #!/usr/bin/env bash
-# CreateWebSite "nom du fichier" "titre" "chemin des images"
+
 page="$1"
 title="$2"
 folder="$3"
 
-controleVariable() {
+
+controlOption() {
+    while getopts ":hn:" option; do
+        case $option in
+        h) # display Help
+            Help
+            exit
+            ;;
+        n) # Enter a name
+            Name=$OPTARG ;;
+        \?) # Invalid option
+            echo "Error: Invalid option"
+            Help
+            exit
+            ;;
+        esac
+    done
+}
+
+Help() {
+    echo "Add description of the script functions here."
+    echo
+    echo "Syntax: CreateWebSite \"nom du fichier" "titre" "chemin des images"\"
+    echo "options:"
+    echo "g     Print the GPL license notification."
+    echo "h     Print this Help."
+    echo "v     Verbose mode."
+    echo "V     Print software version and exit."
+    echo
+}
+
+Name="world"
+
+controlParametre() {
 
     if [ $# = 3 ]; then
         return 1
@@ -28,7 +61,13 @@ controleVariable() {
         fi
     
 }
-echo "$@"
-controleVariable "$@"
+
+
+
+echo "$@" 
+
+controlOption "$@"
+controlParametre "$@"
+
 echo "$folder"
 
