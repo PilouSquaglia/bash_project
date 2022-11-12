@@ -70,4 +70,12 @@ controlOption "$@"
 controlParametre "$@"
 
 echo "$folder"
+echo "$title"
+echo "$page"
+mkdir "$title"
+cd "$title"
+
+sed "s/Document/${title}/" ../src/header.php > header.php
+
+sed "s/title/${titlePicture}/" ../src/home.php > home.php
 
