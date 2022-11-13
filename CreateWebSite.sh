@@ -73,9 +73,19 @@ echo "$folder"
 echo "$title"
 echo "$page"
 mkdir "$title"
-cd "$title"
+cd "$title" || exit
 
 sed "s/Document/${title}/" ../src/header.php > header.php
 
-sed "s/title/${titlePicture}/" ../src/home.php > home.php
+for item in ../src/images/*; do
+    if [[ "${item}" =~ /(.*).j?p(e|n)?g|.webp ]]; then
+        #cut -c 1-5 "${item}"
+        sed "s/titlePicture/eeee/" ../src/picture.php > t.php 
+        echo "${item}"
+        #contains: ${substring}"
+    fi
+    
+done
+
+#sed "s/title/${titlePicture}/" ../src/home.php > home.php
 
