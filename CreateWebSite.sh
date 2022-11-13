@@ -75,10 +75,16 @@ cd "$title" || exit
 sed "s/Document/${title}/" ../src/header.php >header.php
 mkdir Picture
 for item in ../src/images/*; do
-    if [[ "${item}" =~ /(.*).j?p(e|n)?g|.webp ]]; then
+    if [[ "${item}" =~ \.(j?p(e|n)?g|webp) ]]; then
         nomFichier="${item##*/}"
-        echo "$nomFichier"
+        nomFichier=$(echo "$nomFichier" | cut -f 1 -d '.')
+        
+        info=$(cat ../src/images/"${nomFichier}".txt)
+        echo "${info}"
+    
         sed "s/titlePicture/${nomFichier}/" ../src/picture.php > Picture/"${nomFichier}".php
+
+        #sed "s/title/${nomFichier}/" Picture/"${nomFichier}".php > Picture/"${nomFichier}".php
     fi
 
 done
