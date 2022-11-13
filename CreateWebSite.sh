@@ -4,7 +4,6 @@ page="$1"
 title="$2"
 folder="$3"
 
-
 controlOption() {
     while getopts ":hn:" option; do
         case $option in
@@ -42,29 +41,27 @@ controlParametre() {
     if [ $# = 3 ]; then
         return 1
     elif [ "$1" = "" ]; then
-                echo -e "Enter new web page name ... \c";
-                read -r "page";
-            else
-            page="$1";
-        fi
-        if [ "$2" = "" ]; then
-            echo -e "Enter the title ... \c";
-            read -r "title";
-        else
-            title="$2";
-        fi
-        if [ "$3" = "" ]; then
-            echo -e "Enter the folder path ... \c";
-            read -r "folder";
-        else
-            folder="$3";
-        fi
-    
+        echo -e "Enter new web page name ... \c"
+        read -r "page"
+    else
+        page="$1"
+    fi
+    if [ "$2" = "" ]; then
+        echo -e "Enter the title ... \c"
+        read -r "title"
+    else
+        title="$2"
+    fi
+    if [ "$3" = "" ]; then
+        echo -e "Enter the folder path ... \c"
+        read -r "folder"
+    else
+        folder="$3"
+    fi
+
 }
 
-
-
-echo "$@" 
+echo "$@"
 
 controlOption "$@"
 controlParametre "$@"
@@ -75,17 +72,15 @@ echo "$page"
 mkdir "$title"
 cd "$title" || exit
 
-sed "s/Document/${title}/" ../src/header.php > header.php
-
+sed "s/Document/${title}/" ../src/header.php >header.php
+mkdir Picture
 for item in ../src/images/*; do
     if [[ "${item}" =~ /(.*).j?p(e|n)?g|.webp ]]; then
-        #cut -c 1-5 "${item}"
-        sed "s/titlePicture/eeee/" ../src/picture.php > t.php 
-        echo "${item}"
-        #contains: ${substring}"
+        nomFichier="${item##*/}"
+        echo "$nomFichier"
+        sed "s/titlePicture/${nomFichier}/" ../src/picture.php > Picture/"${nomFichier}".php
     fi
-    
+
 done
 
 #sed "s/title/${titlePicture}/" ../src/home.php > home.php
-
