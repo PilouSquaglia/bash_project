@@ -61,6 +61,19 @@ controlParametre() {
 
 }
 
+controlFichier()
+{
+   echo "$1.txt"
+    if [ -e "$2$1.txt" ]
+then
+    echo "Mon fichier existe"
+else
+    echo "Fichier n'existe pas"
+    cat "$2.fichierconfig" > "$2$1.txt"
+fi
+    
+}
+
 echo "$@"
 
 controlOption "$@"
@@ -79,8 +92,9 @@ for item in ../src/images/*; do
         nomFichier="${item##*/}"
         nomFichier=$(echo "$nomFichier" | cut -f 1 -d '.')
         
+        controlFichier "$nomFichier" "../src/images/"
         info=$(cat ../src/images/"${nomFichier}".txt)
-        echo "${info}"
+        #echo "${info}"
     
         sed "s/titlePicture/${nomFichier}/" ../src/picture.php > Picture/"${nomFichier}".php
 
@@ -88,5 +102,6 @@ for item in ../src/images/*; do
     fi
 
 done
+
 
 #sed "s/title/${titlePicture}/" ../src/home.php > home.php
