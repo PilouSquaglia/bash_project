@@ -61,17 +61,14 @@ controlParametre() {
 
 }
 
-controlFichier()
-{
-   echo "$1.txt"
-    if [ -e "$2$1.txt" ]
-then
-    echo "Mon fichier existe"
-else
-    echo "Fichier n'existe pas"
-    cat "$2.fichierconfig" > "$2$1.txt"
-fi
-    
+controlFichier() {
+    echo "$1.txt"
+    if ! [ -e "$2$1.txt" ]; then
+        echo "Fichier n'existe pas"
+        cat "$2.fichierconfig" >"$2$1.txt"
+
+    fi
+
 }
 
 echo "$@"
@@ -79,29 +76,32 @@ echo "$@"
 controlOption "$@"
 controlParametre "$@"
 
-echo "$folder"
-echo "$title"
-echo "$page"
 mkdir "$title"
 cd "$title" || exit
 
-sed "s/Document/${title}/" ../src/header.php >header.php
+cp ../src/Index.php ./
+cp ../src/home.php ./
+cp ../src/css.css ./
+
 mkdir Picture
+
 for item in ../src/images/*; do
     if [[ "${item}" =~ \.(j?p(e|n)?g|webp) ]]; then
+
         nomFichier="${item##*/}"
         nomFichier=$(echo "$nomFichier" | cut -f 1 -d '.')
-        
+
         controlFichier "$nomFichier" "../src/images/"
         info=$(cat ../src/images/"${nomFichier}".txt)
-        #echo "${info}"
-    
-        sed "s/titlePicture/${nomFichier}/" ../src/picture.php > Picture/"${nomFichier}".php
+        echo "${info}"
+
+        sed "s/titlePicture/${nomFichier}/" ../src/picture.php >Picture/"${nomFichier}".php
 
         #sed "s/title/${nomFichier}/" Picture/"${nomFichier}".php > Picture/"${nomFichier}".php
+
+        cat ./Picture/"$nomFichier".php >> home.php
     fi
 
 done
-
 
 #sed "s/title/${titlePicture}/" ../src/home.php > home.php
