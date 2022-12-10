@@ -100,4 +100,3 @@ for item in ../src/images/*; do
         cat ./Picture/"$nomFichier".php >> home.php
     fi
 done
-
