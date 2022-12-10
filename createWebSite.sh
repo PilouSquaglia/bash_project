@@ -7,16 +7,16 @@ folder="$3"
 controlOption() {
     while getopts ":hn:" option; do
         case $option in
-        h) # display Help
-            Help
-            exit
+            h) # Display Help
+                Help
+                exit
             ;;
-        n) # Enter a name
+            n) # Enter a name
             Name=$OPTARG ;;
-        \?) # Invalid option
-            echo "Error: Invalid option"
-            Help
-            exit
+            \?) # Invalid option
+                echo "Error: Invalid option"
+                Help
+                exit
             ;;
         esac
     done
@@ -40,7 +40,7 @@ controlParametre() {
 
     if [ $# = 3 ]; then
         return 1
-    elif [ "$1" = "" ]; then
+        elif [ "$1" = "" ]; then
         echo -e "Enter new web page name ... \c"
         read -r "page"
     else
@@ -97,11 +97,7 @@ for item in ../src/images/*; do
 
         sed "s/titlePicture/${nomFichier}/" ../src/picture.php >Picture/"${nomFichier}".php
 
-        #sed "s/title/${nomFichier}/" Picture/"${nomFichier}".php > Picture/"${nomFichier}".php
-
         cat ./Picture/"$nomFichier".php >> home.php
     fi
-
 done
 
-#sed "s/title/${titlePicture}/" ../src/home.php > home.php
