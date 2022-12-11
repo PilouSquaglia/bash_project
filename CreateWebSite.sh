@@ -109,4 +109,7 @@ for item in ./Picture/*; do
 
 done
 
+cd ..
+
+mv  "$title" /"$3"/
 #sed "s/title/${titlePicture}/" ../src/home.php > home.php
