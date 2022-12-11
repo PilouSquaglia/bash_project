@@ -62,16 +62,13 @@ controlParametre() {
 }
 
 controlFichier() {
-    echo "$1.txt"
     if ! [ -e "$2$1.txt" ]; then
-        echo "Fichier n'existe pas"
+        echo "Fichier $1.txt n'existe pas on en avons créé un par défaut modifié le et relancez la commande avec -r"
         cat "$2.fichierconfig" >"$2$1.txt"
 
     fi
 
 }
-
-echo "$@"
 
 controlOption "$@"
 controlParametre "$@"
@@ -79,11 +76,8 @@ controlParametre "$@"
 mkdir "$title"
 cd "$title" || exit
 
-cp ../src/Index.php ./
-cp ../src/home.php ./
-cp ../src/css.css ./
-
-cp -R ../src/images ./
+cp -R ../src/* ./
+sed -i '' "s/HOME/$page/" home.php
 mv -f images Picture
 
 for item in ./Picture/*; do
