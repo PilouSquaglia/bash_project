@@ -8,4 +8,6 @@ if ($page === "/") {
 }else{
     include("404.php");
 }
+
+include("footer.php");
 ?>

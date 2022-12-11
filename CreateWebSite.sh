@@ -78,6 +78,7 @@ cd "$title" || exit
 
 cp -R ../src/* ./
 sed -i '' "s/HOME/$page/" home.php
+sed -i '' "s/HOME/$page/" header.php
 mv -f images Picture
 
 for item in ./Picture/*; do
