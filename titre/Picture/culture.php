@@ -3,11 +3,11 @@
         <div class="container-lg text-center" style="max-width: 600px;">
             <div class="card text-center">
                 <div class="card-header">
-                    hgfh
+                    culture
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">title</h5>
-                    <img src=folder class="card-img-top" alt="...">
+                    <h5 class="card-title">culture</h5>
+                    <img src="./Picture/culture.jpeg" class="card-img-top" alt="...">
                     <p class="card-text">description</p>
 
                     <a href="index.php?page=profileAmi&id=user" class="btn btn-primary">user</a>

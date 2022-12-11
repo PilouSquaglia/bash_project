@@ -1,4 +1,6 @@
 <h1>HOME</h1>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
 <body>
     
 </body><body>
@@ -9,8 +11,8 @@
                     bastia
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">title</h5>
-                    <img src=folder class="card-img-top" alt="...">
+                    <h5 class="card-title">bastia</h5>
+                    <img src="./Picture/bastia.jpeg" class="card-img-top" alt="...">
                     <p class="card-text">description</p>
 
                     <a href="index.php?page=profileAmi&id=user" class="btn btn-primary">user</a>
@@ -30,8 +32,8 @@
                     canard
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">title</h5>
-                    <img src=folder class="card-img-top" alt="...">
+                    <h5 class="card-title">canard</h5>
+                    <img src="./Picture/canard.jpeg" class="card-img-top" alt="...">
                     <p class="card-text">description</p>
 
                     <a href="index.php?page=profileAmi&id=user" class="btn btn-primary">user</a>
@@ -51,8 +53,8 @@
                     culture
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">title</h5>
-                    <img src=folder class="card-img-top" alt="...">
+                    <h5 class="card-title">culture</h5>
+                    <img src="./Picture/culture.jpeg" class="card-img-top" alt="...">
                     <p class="card-text">description</p>
 
                     <a href="index.php?page=profileAmi&id=user" class="btn btn-primary">user</a>
@@ -72,8 +74,8 @@
                     hgfh
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">title</h5>
-                    <img src=folder class="card-img-top" alt="...">
+                    <h5 class="card-title">hgfh</h5>
+                    <img src="./Picture/hgfh.jpeg" class="card-img-top" alt="...">
                     <p class="card-text">description</p>
 
                     <a href="index.php?page=profileAmi&id=user" class="btn btn-primary">user</a>
@@ -93,8 +95,8 @@
                     pomme
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">title</h5>
-                    <img src=folder class="card-img-top" alt="...">
+                    <h5 class="card-title">pomme</h5>
+                    <img src="./Picture/pomme.jpeg" class="card-img-top" alt="...">
                     <p class="card-text">description</p>
 
                     <a href="index.php?page=profileAmi&id=user" class="btn btn-primary">user</a>

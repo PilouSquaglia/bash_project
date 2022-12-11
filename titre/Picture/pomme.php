@@ -6,8 +6,8 @@
                     pomme
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">title</h5>
-                    <img src=folder class="card-img-top" alt="...">
+                    <h5 class="card-title">pomme</h5>
+                    <img src="./Picture/pomme.jpeg" class="card-img-top" alt="...">
                     <p class="card-text">description</p>
 
                     <a href="index.php?page=profileAmi&id=user" class="btn btn-primary">user</a>
