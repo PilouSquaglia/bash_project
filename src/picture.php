@@ -10,7 +10,7 @@
                     <img src="folder" class="card-img-top" alt="...">
                     <p class="card-text">description</p>
 
-                    <a href="index.php?page=profileAmi&id=user" class="btn btn-primary">user</a>
+                    <a href="lien" class="btn btn-primary">lien</a>
                 </div>
                 <div class="card-footer text-muted">
                     Date of the post: dateUpload

@@ -84,29 +84,30 @@ cp ../src/home.php ./
 cp ../src/css.css ./
 
 cp -R ../src/images ./
-mv images Picture
+mv -f images Picture
 
-for item in ../src/images/*; do
+for item in ./Picture/*; do
     if [[ "${item}" =~ \.(j?p(e|n)?g|webp) ]]; then
 
         nomFichier="${item##*/}"
         nomFichier=$(echo "$nomFichier" | cut -f 1 -d '.')
 
         controlFichier "$nomFichier" "./Picture/"
-        info=$(cat ./Picture/"${nomFichier}".txt)
-        #echo "${info}"
-        titre=$(cut -d ":" -f 1 ./Picture/"${nomFichier}".txt)
-        echo "${titre}"
-
+     
+        titre=$(grep titre ./Picture/"${nomFichier}".txt | cut -d ":" -f 2 )
+        description=$(grep description ./Picture/"${nomFichier}".txt | cut -d ":" -f 2 )
+        lien=$(grep lien ./Picture/"${nomFichier}".txt | cut -d ":" -f 2 )
+       
         cp ../src/picture.php ./Picture
         mv ./Picture/picture.php ./Picture/"${nomFichier}".php
 
         cheminPic="./Picture/${nomFichier}.jpeg"
 
         sed -i '' "s/titlePicture/${nomFichier}/" Picture/"${nomFichier}".php
-        sed -i '' "s/titleCard/${nomFichier}/" ./Picture/"${nomFichier}".php
+        sed -i '' "s/titleCard/${titre}/" ./Picture/"${nomFichier}".php
         sed -i '' "s@folder@${cheminPic}@" ./Picture/"${nomFichier}".php
-        #sed "s/title/${nomFichier}/" Picture/"${nomFichier}".php > Picture/"${nomFichier}".php
+        sed -i '' "s/description/${description}/" ./Picture/"${nomFichier}".php
+        sed -i '' "s/lien/${lien}/" ./Picture/"${nomFichier}".php
 
         cat ./Picture/"$nomFichier".php >>home.php
     fi
