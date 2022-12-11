@@ -1,10 +1,13 @@
 <?php
-define("PATHPAGES", "pages" . DIRECTORY_SEPARATOR);
 
-include(PATHPAGES . "header.php");
+include("header.php");
 if ($page === "/") {
-    include(PATHPAGES . "home.php");
+    include("home.php");
 } else if ($page === "inscription") {
-    include(PATHPAGES . "inscription.php");
+    include("inscription.php");
+}else{
+    include("404.php");
 }
+
+include("footer.php");
 ?>

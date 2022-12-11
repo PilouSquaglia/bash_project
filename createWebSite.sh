@@ -62,16 +62,13 @@ controlParametre() {
 }
 
 controlFichier() {
-    echo "$1.txt"
     if ! [ -e "$2$1.txt" ]; then
-        echo "Fichier n'existe pas"
+        echo "Fichier $1.txt n'existe pas on en avons créé un par défaut modifié le et relancez la commande avec -r"
         cat "$2.fichierconfig" >"$2$1.txt"
 
     fi
 
 }
-
-echo "$@"
 
 controlOption "$@"
 controlParametre "$@"
@@ -79,24 +76,39 @@ controlParametre "$@"
 mkdir "$title"
 cd "$title" || exit
 
-cp ../src/Index.php ./
-cp ../src/home.php ./
-cp ../src/css.css ./
+cp -R ../src/* ./
+sed -i '' "s/HOME/$page/" home.php
+sed -i '' "s/HOME/$page/" header.php
+mv -f images Picture
 
-mkdir Picture
-
-for item in ../src/images/*; do
+for item in ./Picture/*; do
     if [[ "${item}" =~ \.(j?p(e|n)?g|webp) ]]; then
 
         nomFichier="${item##*/}"
         nomFichier=$(echo "$nomFichier" | cut -f 1 -d '.')
 
-        controlFichier "$nomFichier" "../src/images/"
-        info=$(cat ../src/images/"${nomFichier}".txt)
-        echo "${info}"
+        controlFichier "$nomFichier" "./Picture/"
+     
+        titre=$(grep titre ./Picture/"${nomFichier}".txt | cut -d ":" -f 2 )
+        description=$(grep description ./Picture/"${nomFichier}".txt | cut -d ":" -f 2 )
+        lien=$(grep lien ./Picture/"${nomFichier}".txt | cut -d ":" -f 2 )
+       
+        cp ../src/picture.php ./Picture
+        mv ./Picture/picture.php ./Picture/"${nomFichier}".php
 
-        sed "s/titlePicture/${nomFichier}/" ../src/picture.php >Picture/"${nomFichier}".php
+        cheminPic="./Picture/${nomFichier}.jpeg"
 
-        cat ./Picture/"$nomFichier".php >> home.php
+        sed -i '' "s/titlePicture/${nomFichier}/" Picture/"${nomFichier}".php
+        sed -i '' "s/titleCard/${titre}/" ./Picture/"${nomFichier}".php
+        sed -i '' "s@folder@${cheminPic}@" ./Picture/"${nomFichier}".php
+        sed -i '' "s/description/${description}/" ./Picture/"${nomFichier}".php
+        sed -i '' "s/lien/${lien}/" ./Picture/"${nomFichier}".php
+
+        cat ./Picture/"$nomFichier".php >>home.php
     fi
 done
+
+cd ..
+
+mv  "$title" /"$3"/
+#sed "s/title/${titlePicture}/" ../src/home.php > home.php
