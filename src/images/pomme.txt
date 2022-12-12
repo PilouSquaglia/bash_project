@@ -1,6 +1,5 @@
-title: suivie de votre titre
+title:
 
-description: suivie de votre
-port de france au francais
+description:
 
-link: suivie d'un lien
+link:

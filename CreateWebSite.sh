@@ -47,7 +47,7 @@ controlFichier() {
 }
 
 makePost() {
-    
+
     for item in "$1"/Picture/*; do
         if [[ "${item}" =~ \.(j?p(e|n)?g|webp) ]]; then
 
@@ -76,7 +76,23 @@ makePost() {
 
     done
 }
+searchTxt() {
 
+    for item in "$1"/Picture/*; do
+
+        if [[ "${item}" =~ \.txt ]]; then
+
+            nomFichier="${item##*/}"
+            nomFichier=$(echo "$nomFichier" | cut -f 1 -d '.')
+         
+            mv -f "${item}" ./src/images/"${nomFichier}.txt"
+         
+        fi
+    done
+    
+    rm -r "$1"
+
+}
 makeAll() {
 
     mkdir "$title"
@@ -100,17 +116,21 @@ Help() {
     echo "Syntax: CreateWebSite \"nom du fichier" "titre" "chemin des images"\"
     echo "options:"
     echo "h     Print this Help."
+    echo "r     Reload the text picture to the src/images you need to reload the command"
     echo "Make command like this: ./CreateWebSite.sh page titre ./test   "
 }
 
 controlOption() {
-    while getopts "h" option; do
+    while getopts "hr:" option; do
         case $option in
         h) # display Help
             Help
             exit
             ;;
-        
+        r)
+            searchTxt "$OPTARG"
+            exit
+            ;;
         \?) # Invalid option
             echo "Error: Invalid option"
             Help
