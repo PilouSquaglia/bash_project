@@ -47,8 +47,8 @@ controlFichier() {
 }
 
 makePost() {
-
-    for item in ./"$1"/Picture/*; do
+    
+    for item in "$1"/Picture/*; do
         if [[ "${item}" =~ \.(j?p(e|n)?g|webp) ]]; then
 
             nomFichier="${item##*/}"
@@ -60,18 +60,18 @@ makePost() {
             description=$(grep description ./Picture/"${nomFichier}".txt | cut -d ":" -f 2)
             lien=$(grep lien ./Picture/"${nomFichier}".txt | cut -d ":" -f 2)
 
-            cp ../src/picture.php ./Picture
-            mv ./Picture/picture.php ./Picture/"${nomFichier}".php
+            cp ../src/picture.html ./Picture
+            mv ./Picture/picture.html ./Picture/"${nomFichier}".html
 
             cheminPic="./Picture/${nomFichier}.jpeg"
 
-            sed -i '' "s/titlePicture/${nomFichier}/" Picture/"${nomFichier}".php
-            sed -i '' "s/titleCard/${titre}/" ./Picture/"${nomFichier}".php
-            sed -i '' "s@folder@${cheminPic}@" ./Picture/"${nomFichier}".php
-            sed -i '' "s/description/${description}/" ./Picture/"${nomFichier}".php
-            sed -i '' "s/lien/${lien}/" ./Picture/"${nomFichier}".php
+            sed -i '' "s/titlePicture/${nomFichier}/" Picture/"${nomFichier}".html
+            sed -i '' "s/titleCard/${titre}/" ./Picture/"${nomFichier}".html
+            sed -i '' "s@folder@${cheminPic}@" ./Picture/"${nomFichier}".html
+            sed -i '' "s/description/${description}/" ./Picture/"${nomFichier}".html
+            sed -i '' "s/lien/${lien}/" ./Picture/"${nomFichier}".html
 
-            cat ./Picture/"$nomFichier".php >>home.php
+            cat ./Picture/"$nomFichier".html >>home.html
         fi
 
     done
@@ -83,14 +83,14 @@ makeAll() {
     cd "$title" || exit
 
     cp -R ../src/* ./
-    sed -i '' "s/HOME/$page/" home.php
-    sed -i '' "s/HOME/$page/" header.php
+    sed -i '' "s/HOME/$page/" home.html
+    sed -i '' "s/HOME/$page/" header.html
     mv -f images Picture
 
     makePost ./
 
     cd ..
-    echo "$folder"
+
     mv "$title" "$folder"
 }
 
@@ -100,21 +100,17 @@ Help() {
     echo "Syntax: CreateWebSite \"nom du fichier" "titre" "chemin des images"\"
     echo "options:"
     echo "h     Print this Help."
-    echo "r     Reload the description of the post"
     echo "Make command like this: ./CreateWebSite.sh page titre ./test   "
 }
 
 controlOption() {
-    while getopts ":hr:" option; do
+    while getopts "h" option; do
         case $option in
         h) # display Help
             Help
             exit
             ;;
-        r)
-            makePost /test/titre/
-            exit
-            ;;
+        
         \?) # Invalid option
             echo "Error: Invalid option"
             Help
@@ -125,11 +121,9 @@ controlOption() {
 
     done
 
+    controlParametre "$@"
     makeAll "$@"
     exit
 }
 
-controlParametre "$@"
-
 controlOption "$@"
-

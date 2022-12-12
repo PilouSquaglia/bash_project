@@ -1,13 +1,13 @@
 <?php
 
-include("header.php");
+include("header.html");
 if ($page === "/") {
-    include("home.php");
+    include("home.html");
 } else if ($page === "inscription") {
-    include("inscription.php");
+    include("inscription.html");
 }else{
-    include("404.php");
+    include("404.html");
 }
 
-include("footer.php");
+include("footer.html");
 ?>
